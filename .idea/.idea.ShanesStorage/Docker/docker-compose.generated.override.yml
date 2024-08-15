@@ -5,32 +5,16 @@ services:
       context: "C:\\Users\\shane\\Documents\\repos\\ShanesStorage"
       dockerfile: "ShanesStorage.Web/Dockerfile"
       target: "base"
-      args:
-        BUILD_CONFIGURATION: "Debug"
     command: []
     entrypoint:
-    - "/opt/rider-debugger/linux-x64/JetBrains.Debugger.Worker"
-    - "--runtimeconfig"
-    - "/opt/rider-debugger/JetBrains.Debugger.Worker.runtimeconfig.json"
-    - "--mode=server"
-    - "--frontend-port=57100"
-    - "--backend-port=57300"
-    - "--timeout=60"
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/ShanesStorage.Web.dll"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
-      RIDER_DEBUGGER_LOG_DIR: "/var/opt/rider-debugger"
-      RESHARPER_LOG_CONF: "/etc/opt/rider-debugger/backend-log.xml"
     image: "shanesstorage.web:dev"
-    ports:
-    - "127.0.0.1:57009:57100"
-    - "127.0.0.1:57209:57300"
+    ports: []
     volumes:
     - "C:\\Users\\shane\\.nuget\\packages:/home/app/.nuget/packages"
     - "C:\\Users\\shane\\Documents\\repos\\ShanesStorage\\ShanesStorage.Web:/app:rw"
     - "C:\\Users\\shane\\Documents\\repos\\ShanesStorage:/src:rw"
-    - "C:\\Users\\shane\\AppData\\Local\\JetBrains\\RiderRemoteDebugger\\2024.1.2\\\
-      Linux64:/opt/rider-debugger"
-    - "C:\\Program Files\\JetBrains\\JetBrains Rider 2024.1.1\\bin:/etc/opt/rider-debugger/backend-log.xml"
-    - "C:\\Users\\shane\\AppData\\Local\\JetBrains\\Rider2024.1\\log\\DebuggerWorker\\\
-      JetBrains.Debugger.Worker.2024_8_15_19_16_53:/var/opt/rider-debugger:rw"
     working_dir: "/app"
