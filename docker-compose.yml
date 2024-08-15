@@ -1,0 +1,6 @@
+﻿services:
+  shanesstorage.web:
+    image: shanesstorage.web
+    build:
+      context: .
+      dockerfile: ShanesStorage.Web/Dockerfile

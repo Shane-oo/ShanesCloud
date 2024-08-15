@@ -1,0 +1,6 @@
+@ShanesStorage.Web_HostAddress = http://localhost:5296
+
+GET {{ShanesStorage.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
