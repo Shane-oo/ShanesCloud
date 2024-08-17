@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -30,7 +28,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapGet("", () => "Hello Shane, Ya Big boy");
 
-app.MapGet("/test/{id:int}", ([FromRoute] int id) => Results.Ok("You gave me this is: " + id));
+app.MapGet("/test/{id:int}/{subId:int}", (int id, int subId) => Results.Ok("You gave me this is: " + id + "And thus" + subId));
 
 app.MapGet("/test", ([AsParameters] MyTestQuery query) => Results.Ok($"You gave me this ID: {query.Id} and Page: {query.Page}"));
 
