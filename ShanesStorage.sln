@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShanesStorage.Web", "ShanesStorage.Web\ShanesStorage.Web.csproj", "{A2E3B21F-11CD-4425-BCAE-DC9D3B204146}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShanesStorage.Api", "ShanesStorage.Api\ShanesStorage.Api.csproj", "{A2E3B21F-11CD-4425-BCAE-DC9D3B204146}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2A7E3730-D230-4215-939E-F48D4B3DAF92}"
 	ProjectSection(SolutionItems) = preProject
