@@ -12,7 +12,7 @@ export class MainComponent {
     if (this.isLeftSidebarCollapsed()) {
       return '';
     }
-    return this.screenWidth() > 765 ? 'body-trimmed' : 'body-md-screen';
+    return this.screenWidth() > 765 ? 'body-md-screen' : 'body-trimmed';
   });
 
 }

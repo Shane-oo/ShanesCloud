@@ -1,0 +1,6 @@
+.background {
+  top: 0;
+  background: #0c0c0c;
+  background-size: 100% 100%;
+  min-height: 100vh;
+}
