@@ -13,4 +13,12 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Carter" Version="8.2.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ShanesStorage.Files\ShanesStorage.Files.csproj" />
+    </ItemGroup>
+
 </Project>
