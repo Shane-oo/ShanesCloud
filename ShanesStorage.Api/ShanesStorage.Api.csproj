@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
@@ -14,7 +14,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Azure.Storage.Blobs" Version="12.21.2" />
       <PackageReference Include="Carter" Version="8.2.1" />
+      <PackageReference Include="Microsoft.Extensions.Azure" Version="1.7.5" />
     </ItemGroup>
 
     <ItemGroup>

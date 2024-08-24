@@ -2,5 +2,5 @@
 
 public class GetFoldersQueryRequest
 {
-    
+    public string ParentFolder { get; set; }
 }

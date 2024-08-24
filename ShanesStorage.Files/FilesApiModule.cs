@@ -20,9 +20,12 @@ public class FilesApiModule: CarterModule
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/list", async ([AsParameters] GetFoldersQueryRequest getFoldersQueryRequest, CancellationToken cancellationToken) =>
+        app.MapGet("/list", async ([AsParameters] GetFoldersQueryRequest request, CancellationToken cancellationToken) =>
                             {
-                                var query = new GetFoldersQuery();
+                                var query = new GetFoldersQuery
+                                            {
+                                                ParentFolder = request.ParentFolder
+                                            };
 
                                 var result = await _sender.Send(query, cancellationToken);
 

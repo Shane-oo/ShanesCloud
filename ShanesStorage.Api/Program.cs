@@ -3,6 +3,20 @@ using ShanesStorage.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Settings
+var appSettings = builder.Configuration
+                         .GetSection("AppSettings")
+                         .Get<AppSettings>();
+
+builder.Services
+       .AddOptions<AppSettings>()
+       .BindConfiguration("AppSettings")
+       .ValidateDataAnnotations()
+       .ValidateOnStart();
+
+
+builder.Services.AddStorageAccountServices(appSettings.StorageAccountSettings, builder.Environment);
+
 builder.Services.AddMediatRServices();
 builder.Services.AddCarter();
 
@@ -14,12 +28,6 @@ app.UseHttpsRedirection();
 
 
 app.MapGet("/ping", () => "pong");
-
-/*app.MapGet("/test/{id:int}/{subId:int}", (int id, int subId) => Results.Ok("You gave me this is: " + id + "And thus" + subId));
-
-app.MapGet("/test", ([AsParameters] MyTestQuery query) => Results.Ok($"You gave me this ID: {query.Id} and Page: {query.Page}"));
-
-app.MapPost("/test", (MyTestPost myTestPost) => Results.Ok(myTestPost));*/
 
 
 app.MapCarter(); // Maps all Minimal Api Endpoints that inherit ICarterModule/CarterModule
