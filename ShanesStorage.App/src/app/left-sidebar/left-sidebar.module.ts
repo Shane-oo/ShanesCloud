@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LeftSidebarComponent } from './left-sidebar.component';
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -16,6 +17,7 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
     CommonModule,
     RouterLink,
     RouterLinkActive,
+    ReactiveFormsModule
   ]
 })
 export class LeftSidebarModule { }

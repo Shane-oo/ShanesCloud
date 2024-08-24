@@ -69,7 +69,6 @@
   height: 2.5rem;
   color: #b1b1b3;
   text-decoration: none;
-  border-radius: 0.625rem;
   transition: all 0.3s ease;
 }
 
@@ -93,3 +92,58 @@
   color: #d6d6d6 !important;
 }
 
+
+.sidenav-nav .sidenav-nav-file {
+  width: 100%;
+}
+
+.sidenav-nav .sidenav-nav-file .sidenav-nav-link {
+  display: flex;
+  align-items: center;
+  height: 1.25rem;
+  color: #b1b1b3;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.sidenav-nav .sidenav-nav-file .sidenav-nav-link .sidenav-link-icon {
+  font-size: 16px;
+  width: 2rem;
+  min-width: 2rem;
+  text-align: center;
+  padding: 1px;
+}
+
+.sidenav-nav .sidenav-nav-file:hover .sidenav-nav-link {
+  color: #d6d6d6;
+}
+
+
+.sidenav-nav .search-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 1.25rem;
+  color: #b1b1b3;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  min-width: 2rem;
+  text-align: center;
+  padding-top: 5rem;
+  padding-left: 1rem;
+  padding-bottom: .75rem;
+}
+
+.sidenav-nav .search-bar input {
+  width: 15.5rem;
+  background-color: #0A0A0A;
+  border: 1px solid #b1b1b3;
+  padding: 0.5rem;
+  border-radius: .1rem;
+  color: #d6d6d6;
+}
+
+.child-folder {
+  margin-left: 1.5rem;
+}

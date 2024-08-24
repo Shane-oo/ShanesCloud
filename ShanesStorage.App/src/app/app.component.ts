@@ -1,4 +1,4 @@
-import {Component, HostListener, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, HostListener, inject, OnInit, signal} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
 
 @Component({
@@ -8,11 +8,17 @@ import {DOCUMENT} from "@angular/common";
 })
 export class AppComponent implements OnInit {
   public isLeftSidebarCollapsed = signal<boolean>(false);
-  public screenWidth = signal<number>(0);
+  private screenWidth = signal<number>(0);
+  public sizeClass = computed(() => {
+    if (this.isLeftSidebarCollapsed()) {
+      return '';
+    }
+    return this.screenWidth() > 765 ? 'body-md-screen' : 'body-trimmed';
+  });
 
   private readonly document: Document = inject(DOCUMENT);
   private readonly window: WindowProxy | null;
-  private movedToSmallScreen: boolean = false;
+  private movedToSmallScreen = false;
 
   constructor() {
     this.window = this.document.defaultView;
