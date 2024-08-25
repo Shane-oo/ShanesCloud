@@ -17,9 +17,9 @@ builder.Services
        .ValidateOnStart();
 
 
-
 builder.Services.AddStorageAccountServices(appSettings.StorageAccountSettings, builder.Environment);
 
+builder.Services.AddFluentValidators();
 builder.Services.AddMediatRServices();
 builder.Services.AddCarter();
 
@@ -38,8 +38,10 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+app.UseMiddleware<ExceptionHandling>();
 
-app.MapGet("/", () => "Hello World Application Everything worked!"); 
+
+app.MapGet("/", () => "Hello World Application Everything worked!");
 app.MapGet("/ping", () => "pong");
 
 

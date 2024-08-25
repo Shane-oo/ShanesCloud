@@ -32,5 +32,8 @@ public class FilesApiModule: CarterModule
                                 return result.IsFailure ? Results.BadRequest(result.ErrorResult) : Results.Ok(result.Value);
                             });
         app.MapGet("/", () => { Console.WriteLine("Get Folders"); });
+        
+        app.MapPost("/products", (string product) => { });
+
     }
 }

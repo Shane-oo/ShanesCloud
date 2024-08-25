@@ -1,7 +1,10 @@
 ﻿using System.Reflection;
 using Azure.Identity;
+using FluentValidation;
 using Microsoft.Extensions.Azure;
+using ShanesCloud.Core;
 using ShanesCloud.Files;
+using ShanesCloud.Users;
 
 namespace ShanesCloud.Api;
 
@@ -12,21 +15,26 @@ public static class DependencyInjection
     private static readonly Assembly[] _assemblies =
     [
         typeof(DependencyInjection).Assembly, // ShanesCloud.Api
-        typeof(FilesApiModule).Assembly // ShanesCloud.Files
+        typeof(FilesApiModule).Assembly, // ShanesCloud.Files
+        typeof(UsersApiModule).Assembly // ShanesCloud.Users
     ];
 
     #endregion
 
     #region Public Methods
 
+    public static void AddFluentValidators(this IServiceCollection services)
+    {
+        services.AddValidatorsFromAssemblies(_assemblies);
+    }
+
     public static void AddMediatRServices(this IServiceCollection services)
     {
-        services.AddMediatR(c =>
+        services.AddMediatR(config =>
                             {
-                                c.RegisterServicesFromAssemblies(_assemblies);
+                                config.RegisterServicesFromAssemblies(_assemblies);
 
-                                // Add Middleware
-                                //c.
+                                config.AddOpenBehavior(typeof(FluentValidationBehaviour<,>));
                             });
     }
 

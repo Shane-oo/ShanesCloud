@@ -1,6 +1,4 @@
-﻿using ShanesCloud.Core.Errors;
-
-namespace ShanesCloud.Core.Exchanges;
+﻿namespace ShanesCloud.Core;
 
 public class Result
 {

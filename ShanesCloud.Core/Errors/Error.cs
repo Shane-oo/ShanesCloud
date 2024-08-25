@@ -1,4 +1,4 @@
-﻿namespace ShanesCloud.Core.Errors;
+﻿namespace ShanesCloud.Core;
 
 public class Error
 {

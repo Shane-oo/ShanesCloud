@@ -13,11 +13,21 @@
   <component name="ChangeListManager">
     <list default="true" id="de5a9cd5-5394-4257-bcca-3fa708231669" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ShanesStorage/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ShanesStorage/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanesCloud.Data/Entities/UserEntities/Users/UserId.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Data/Entities/UserEntities/Users/UserId.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanesCloud.Data/ShanesCloud.Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Data/ShanesCloud.Data.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanesCloud.Data/ShanesCloud.Data.csproj.DotSettings" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Data/ShanesCloud.Data.csproj.DotSettings" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Api/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Api/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Api/ShanesCloud.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Api/ShanesCloud.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Core/Errors/Error.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Core/Errors/Error.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Core/Exchanges/Requests/IQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Core/Exchanges/Requests/IQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Core/Exchanges/Requests/Query.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Core/Exchanges/Requests/Query.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Core/Exchanges/Responses/Result.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Core/Exchanges/Responses/Result.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Core/ShanesCloud.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Core/ShanesCloud.Core.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Data/Entities/UserEntities/Roles/Roles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Data/Entities/UserEntities/Roles/Roles.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Files/FilesApiModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Files/FilesApiModule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Files/Folders/GetFolders/GetFoldersHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Files/Folders/GetFolders/GetFoldersHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Files/Folders/GetFolders/GetFoldersQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Files/Folders/GetFolders/GetFoldersQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.Files/ShanesCloud.Files.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Files/ShanesCloud.Files.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShanesCloud.Users/ShanesCloud.Users.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.Users/ShanesCloud.Users.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShanesCloud.sln" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShanesCloud.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/ShanesCloud.sln.DotSettings.user" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +43,9 @@
         <option value="JSON File" />
       </list>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a830b56ac2ee374c4361712b76d1e07c515d57057b6b4f94181f23d995b2ba/RouteExtensions.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
   <component name="KubernetesApiProvider"><![CDATA[{
@@ -50,7 +63,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.ShanesCloud.Api: https.executor": "Run",
+    ".NET Launch Settings Profile.ShanesCloud.Api: https.executor": "Debug",
     "Docker.ShanesCloud.Api/Dockerfile.executor": "Run",
     "Docker.docker-compose.yml.shanescloud.api: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
@@ -165,7 +178,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1724557723267</updated>
-      <workItem from="1724557724905" duration="10585000" />
+      <workItem from="1724557724905" duration="14608000" />
     </task>
     <servers />
   </component>
@@ -181,6 +194,110 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ShanesCloud.Core/Exchanges/FluentValidationBehaviour.cs</url>
+          <line>27</line>
+          <properties documentPath="C:\Users\ShaneMonck\Documents\repos\ShanesCloud\ShanesCloud.Core\Exchanges\FluentValidationBehaviour.cs" containingFunctionPresentation="Method 'Handle'">
+            <startOffsets>
+              <option value="754" />
+            </startOffsets>
+            <endOffsets>
+              <option value="755" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ShanesCloud.Users/Users/CreateUser/CreateUserHandler.cs</url>
+          <line>7</line>
+          <properties documentPath="C:\Users\ShaneMonck\Documents\repos\ShanesCloud\ShanesCloud.Users\Users\CreateUser\CreateUserHandler.cs" containingFunctionPresentation="Method 'Handle'">
+            <startOffsets>
+              <option value="235" />
+            </startOffsets>
+            <endOffsets>
+              <option value="236" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ShanesCloud.Api/Middleware/ExceptionHandling.cs</url>
+          <line>57</line>
+          <properties documentPath="C:\Users\ShaneMonck\Documents\repos\ShanesCloud\ShanesCloud.Api\Middleware\ExceptionHandling.cs" containingFunctionPresentation="Method 'InvokeAsync'">
+            <startOffsets>
+              <option value="1952" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1953" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ShanesCloud.Users/UsersApiModule.cs</url>
+          <line>33</line>
+          <properties documentPath="C:\Users\ShaneMonck\Documents\repos\ShanesCloud\ShanesCloud.Users\UsersApiModule.cs" containingFunctionPresentation="Lambda expression inside Method 'AddRoutes'">
+            <startOffsets>
+              <option value="719" />
+            </startOffsets>
+            <endOffsets>
+              <option value="720" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ShanesCloud.Users/UsersApiModule.cs</url>
+          <line>43</line>
+          <properties documentPath="C:\Users\ShaneMonck\Documents\repos\ShanesCloud\ShanesCloud.Users\UsersApiModule.cs" containingFunctionPresentation="Lambda expression inside Method 'AddRoutes'">
+            <startOffsets>
+              <option value="1240" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1325" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ShanesCloud.Users/UsersApiModule.cs</url>
+          <line>41</line>
+          <properties documentPath="C:\Users\ShaneMonck\Documents\repos\ShanesCloud\ShanesCloud.Users\UsersApiModule.cs" containingFunctionPresentation="Lambda expression inside Method 'AddRoutes'">
+            <startOffsets>
+              <option value="1149" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1209" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ShanesCloud.Users/Users/CreateUser/CreateUserCommand.cs</url>
+          <line>43</line>
+          <properties documentPath="C:\Users\ShaneMonck\Documents\repos\ShanesCloud\ShanesCloud.Users\Users\CreateUser\CreateUserCommand.cs" containingFunctionPresentation="Constructor 'CreateUserCommandValidator'">
+            <startOffsets>
+              <option value="946" />
+            </startOffsets>
+            <endOffsets>
+              <option value="947" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ShanesCloud.Api/DependencyInjection.cs</url>
+          <line>27</line>
+          <properties documentPath="C:\Users\ShaneMonck\Documents\repos\ShanesCloud\ShanesCloud.Api\DependencyInjection.cs" containingFunctionPresentation="Method 'AddFluentValidators'">
+            <startOffsets>
+              <option value="660" />
+            </startOffsets>
+            <endOffsets>
+              <option value="710" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ShanesCloud.Api/Program.cs</url>
           <line>4</line>
           <properties documentPath="C:\Users\ShaneMonck\Documents\repos\ShanesCloud\ShanesCloud.Api\Program.cs" containingFunctionPresentation="">
@@ -191,7 +308,33 @@
               <option value="133" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ShanesCloud.Core/Exchanges/FluentValidationBehaviour.cs</url>
+          <line>18</line>
+          <properties documentPath="C:\Users\ShaneMonck\Documents\repos\ShanesCloud\ShanesCloud.Core\Exchanges\FluentValidationBehaviour.cs" containingFunctionPresentation="Constructor 'FluentValidationBehaviour'">
+            <startOffsets>
+              <option value="528" />
+            </startOffsets>
+            <endOffsets>
+              <option value="529" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ShanesCloud.Api/DependencyInjection.cs</url>
+          <line>36</line>
+          <properties documentPath="C:\Users\ShaneMonck\Documents\repos\ShanesCloud\ShanesCloud.Api\DependencyInjection.cs" containingFunctionPresentation="Lambda expression inside Method 'AddMediatRServices'">
+            <startOffsets>
+              <option value="985" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1046" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

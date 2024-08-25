@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using ShanesCloud.Data.Entities;
 
-namespace ShanesCloud.Core.Exchanges;
+namespace ShanesCloud.Core;
 
 public interface IQuery<TResponse>: IRequest<Result<TResponse>>;
 
