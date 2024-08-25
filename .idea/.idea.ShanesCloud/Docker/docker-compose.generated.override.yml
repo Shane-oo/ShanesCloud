@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  shanescloud.api:
+    build:
+      context: "C:\\Users\\ShaneMonck\\Documents\\repos\\ShanesCloud"
+      dockerfile: "ShanesCloud.Api/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/ShanesCloud.Api.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "shanescloud.api:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\ShaneMonck\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\ShaneMonck\\Documents\\repos\\ShanesCloud\\ShanesCloud.Api:/app:rw"
+    - "C:\\Users\\ShaneMonck\\Documents\\repos\\ShanesCloud:/src:rw"
+    working_dir: "/app"

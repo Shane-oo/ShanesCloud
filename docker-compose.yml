@@ -22,26 +22,21 @@
     ports:
       - 1433:1433
 
-  shanesstorage.api:
-    image: shanesstorage.api
-    container_name: ShanesStorage.Api
+  shanescloud.api:
+    image: shanescloud.api
+    container_name: ShanesCloud.Api
     ports:
       - 8080:8080
     build:
       context: .
-      dockerfile: ShanesStorage.Api/Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=Password123!
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
-    volumes:
-      - ~/.aspnet/https:/https:ro
+      dockerfile: ShanesCloud.Api/Dockerfile
+
   
-  shanesstorage.app:
-    image: shanesstorage.app
-    container_name: ShanesStorage.App
+  shanescloud.app:
+    image: shanescloud.app
+    container_name: ShanesCloud.App
     build:
-      context: ./ShanesStorage.App
+      context: ./ShanesCloud.App
       dockerfile: Dockerfile
     ports:
       - 420:80
