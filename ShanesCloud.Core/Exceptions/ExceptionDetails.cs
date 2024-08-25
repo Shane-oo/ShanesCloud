@@ -1,4 +1,5 @@
-﻿namespace ShanesCloud.Core;
+﻿
+namespace ShanesCloud.Core;
 
 public class ExceptionDetails
 {

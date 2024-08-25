@@ -3,3 +3,5 @@ azurite/
 */bin/
 */obj/
 */local.settings.json
+*/node_modules/
+*/.angular/cache/*

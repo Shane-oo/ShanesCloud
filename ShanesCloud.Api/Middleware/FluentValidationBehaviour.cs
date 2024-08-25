@@ -1,7 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
+using ShanesCloud.Core;
+using ValidationException = ShanesCloud.Core.ValidationException;
 
-namespace ShanesCloud.Core;
+
+namespace ShanesCloud.Api;
 
 // Pipeline Behaviour for validating commands using Fluent Validation with every mediatr command handler
 public class FluentValidationBehaviour<TRequest, TResponse>: IPipelineBehavior<TRequest, TResponse>

@@ -50,14 +50,17 @@ public class CreateUserCommandValidator: AbstractValidator<CreateUserCommand>
             .MaximumLength(30);
         RuleFor(c => c.Role)
             .IsInEnum()
-            .Must(c => c != Roles.None);
+            .Must(c => c != Roles.None)
+            .WithMessage($"Role must be {nameof(Roles.Admin)} or {nameof(Roles.User)} or {nameof(Roles.Guest)}");
         RuleFor(c => c.Password)
             .NotEmpty()
             .MinimumLength(12)
-            .When(c => c.Role is Roles.Admin or Roles.User);
+            .When(c => c.Role is Roles.Admin or Roles.User)
+            .WithMessage("Password must be set with 12 characters when role is Admin or User");
         RuleFor(c => c.Password)
             .Empty()
-            .When(c => c.Role is Roles.Guest);
+            .When(c => c.Role is Roles.Guest)
+            .WithMessage("Password must be empty when role is Guest");
     }
 
     #endregion

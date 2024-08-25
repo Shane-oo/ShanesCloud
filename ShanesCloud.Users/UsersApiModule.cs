@@ -13,15 +13,12 @@ public class UsersApiModule: CarterModule
 {
     #region Fields
 
-    private readonly ISender _sender;
-
     #endregion
 
     #region Construction
 
     public UsersApiModule(ISender sender): base("users")
     {
-        _sender = sender;
     }
 
     #endregion
@@ -30,16 +27,16 @@ public class UsersApiModule: CarterModule
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/", async (CreateUserRequest request, CancellationToken cancellationToken) =>
+        app.MapPost("/", async (CreateUserRequest request, ISender sender, CancellationToken cancellationToken) =>
                          {
-                             var command = new CreateUserCommand(request.RoleRequest)
+                             var command = new CreateUserCommand(request.Role)
                                            {
                                                UserName = request.UserName,
                                                Email = request.Email,
                                                Password = request.Password
                                            };
 
-                             var result = await _sender.Send(command, cancellationToken);
+                             var result = await sender.Send(command, cancellationToken);
 
                              return result.IsFailure ? Results.BadRequest(result.ErrorResult) : Results.Created();
                          });

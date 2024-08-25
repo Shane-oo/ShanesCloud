@@ -6,7 +6,7 @@ public class CreateUserRequest
 
     public string Password { get; set; }
 
-    public NewRoleRequest RoleRequest { get; set; }
+    public NewRoleRequest Role { get; set; }
 
     public string UserName { get; set; }
 }

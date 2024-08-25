@@ -1,6 +1,18 @@
-@ShanesCloud.Api_HostAddress = http://localhost:5296
+@ShanesCloud.Api_HostAddress = https://localhost:8080
 
-GET {{ShanesCloud.Api_HostAddress}}/weatherforecast/
+GET {{ShanesCloud.Api_HostAddress}}/ping/
 Accept: application/json
 
 ###
+
+
+### Create a new User
+POST {{ShanesCloud.Api_HostAddress}}/users
+Content-Type: application/json
+
+{
+  "email": "shanemonck@shanemonck.com",
+  "username":"ShaneMonckCodes",
+  "password": "Password123!",
+  "Role": 0
+}

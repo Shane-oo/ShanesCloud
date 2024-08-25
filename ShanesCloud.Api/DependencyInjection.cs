@@ -2,7 +2,6 @@
 using Azure.Identity;
 using FluentValidation;
 using Microsoft.Extensions.Azure;
-using ShanesCloud.Core;
 using ShanesCloud.Files;
 using ShanesCloud.Users;
 
