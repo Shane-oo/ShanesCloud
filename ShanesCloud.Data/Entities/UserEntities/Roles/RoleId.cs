@@ -1,3 +1,3 @@
 ﻿namespace ShanesCloud.Data.Entities;
 
-public record RoleId(int Value);
+public record RoleId(Guid Value);

@@ -2,13 +2,17 @@
 
 namespace ShanesCloud.Data.Entities;
 
-public class Role: Entity<RoleId>
+public class Role: Entity<RoleId>, IAuditableEntity
 {
     #region Properties
 
     public string Name { get; set; }
 
     public string NormalizedName { get; set; }
+
+    public DateTimeOffset CreatedOn { get; set; }
+
+    public DateTimeOffset? ModifiedOn { get; set; }
 
     public Guid ConcurrencyStamp { get; set; } = Guid.NewGuid();
 

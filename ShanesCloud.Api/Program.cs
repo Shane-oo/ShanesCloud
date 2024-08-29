@@ -16,9 +16,11 @@ builder.Services
        .ValidateDataAnnotations()
        .ValidateOnStart();
 
+builder.Services.AddDataContext(builder.Configuration.GetConnectionString("Shanes-db"));
 
-builder.Services.AddStorageAccountServices(appSettings.StorageAccountSettings, builder.Environment);
+builder.Services.AddUserIdentity();
 
+builder.Services.AddStorageAccountServices(appSettings.StorageAccountSettings, builder.Environment.IsDevelopment());
 builder.Services.AddFluentValidators();
 builder.Services.AddMediatRServices();
 builder.Services.AddCarter();
@@ -41,7 +43,7 @@ app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionHandling>();
 
 
-app.MapGet("/", () => "Hello World Application Everything worked!");
+app.MapGet("/", () => "WHATS UP!");
 app.MapGet("/ping", () => "pong");
 
 

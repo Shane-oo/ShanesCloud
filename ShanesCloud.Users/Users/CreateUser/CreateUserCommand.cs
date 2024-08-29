@@ -9,13 +9,13 @@ public class CreateUserCommand: Command
 {
     #region Properties
 
-    public string Email { get; set; }
+    public string Email { get; init; }
 
-    public string Password { get; set; }
+    public string Password { get; init; }
 
-    public Roles Role { get; set; }
+    public Roles Role { get; }
 
-    public string UserName { get; set; }
+    public string UserName { get; init; }
 
     #endregion
 

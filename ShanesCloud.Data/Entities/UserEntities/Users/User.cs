@@ -10,6 +10,8 @@ public class User: Entity<UserId>, IAuditableEntity, ISoftDeletable
 
     public DateTimeOffset? ModifiedOn { get; set; }
 
+    public DateTimeOffset? DeletedOn { get; set; }
+
     public bool IsDeleted { get; set; }
 
     public string UserName { get; set; }
@@ -47,6 +49,17 @@ public class User: Entity<UserId>, IAuditableEntity, ISoftDeletable
     public void AddRole(RoleId roleId)
     {
         UserRole = new UserRole(roleId, Id);
+    }
+
+    public void AccessFailed()
+    {
+        AccessFailedCount++;
+        // logic for locking
+    }
+
+    public void AccessSuccess()
+    {
+        AccessFailedCount = 0;
     }
 
     #endregion

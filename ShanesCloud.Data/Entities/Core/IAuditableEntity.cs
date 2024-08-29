@@ -1,4 +1,7 @@
-﻿namespace ShanesCloud.Data.Entities.Core;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+
+namespace ShanesCloud.Data.Entities.Core;
 
 public interface IAuditableEntity
 {
