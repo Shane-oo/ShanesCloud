@@ -11,13 +11,9 @@ namespace ShanesCloud.Users;
 [UsedImplicitly]
 public class UsersApiModule: CarterModule
 {
-    #region Fields
-
-    #endregion
-
     #region Construction
 
-    public UsersApiModule(ISender sender): base("users")
+    public UsersApiModule(): base("users")
     {
     }
 

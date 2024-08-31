@@ -20,5 +20,11 @@ public class Role: Entity<RoleId>, IAuditableEntity
 
     public virtual ICollection<UserRole> UserRoles { get; set; }
 
+    public Roles RoleEnum => Name switch
+                             {
+                                 nameof(Roles.Admin) => Roles.Admin,
+                                 nameof(Roles.User) => Roles.User,
+                                 _ => Roles.Guest
+                             };
     #endregion
 }
