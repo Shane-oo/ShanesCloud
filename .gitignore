@@ -5,3 +5,4 @@ azurite/
 */local.settings.json
 */node_modules/
 */.angular/cache/*
+ShanesCloud.Api/Certificates/

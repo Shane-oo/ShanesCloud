@@ -66,8 +66,10 @@ public class AuthenticateUserWithPasswordHandler: ICommandHandler<AuthenticateUs
             return Failure();
         }
 
-        await _userManager.ResetAccessFailedCountAsync(user);
+        user.LoginOn = DateTime.UtcNow;
 
+        // saves changes
+        await _userManager.ResetAccessFailedCountAsync(user);
 
         return new UserAuthenticationPayload
                {

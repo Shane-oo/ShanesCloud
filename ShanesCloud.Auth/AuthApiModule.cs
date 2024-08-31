@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Routing;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 using ShanesCloud.Auth.Authentications;
+using ShanesCloud.Auth.Authentications.AuthenticateUserWithRefreshToken;
 using ShanesCloud.Core;
+using ShanesCloud.Data.Entities;
 using OpenIddictErrors = OpenIddict.Abstractions.OpenIddictConstants.Errors;
 using OpenIddictClaims = OpenIddict.Abstractions.OpenIddictConstants.Claims;
 using OpenIddictDestinations = OpenIddict.Abstractions.OpenIddictConstants.Destinations;
@@ -21,13 +23,21 @@ namespace ShanesCloud.Auth;
 [UsedImplicitly]
 public class AuthApiModule: CarterModule
 {
+    #region Constants
+
     private const string AUTH_SCHEME = OpenIddictServerAspNetCoreDefaults.AuthenticationScheme;
+
+    #endregion
 
     #region Construction
 
     public AuthApiModule(): base("auth")
     {
     }
+
+    #endregion
+
+    #region Private Methods
 
     private static IResult Forbid(Error error)
     {
@@ -40,9 +50,26 @@ public class AuthApiModule: CarterModule
                               new[] { AUTH_SCHEME });
     }
 
-    #endregion
+    private static async Task<IResult> RefreshToken(HttpContext httpContext, ISender sender, CancellationToken cancellationToken)
+    {
+        // Retrieve the claims principal stored in the refresh token
+        var principal = (await httpContext.AuthenticateAsync(AUTH_SCHEME)).Principal;
+        if (principal == null)
+        {
+            return Forbid(new Error(OpenIddictErrors.InvalidRequest, "Could not get principal from refresh token"));
+        }
 
-    #region Public Methods
+        var subject = principal.GetClaim(OpenIddictClaims.Subject);
+        if (string.IsNullOrEmpty(subject) || !Guid.TryParse(subject, out var userId))
+        {
+            return Forbid(new Error(OpenIddictErrors.InvalidRequestObject, "Missing required subject claim"));
+        }
+
+        var command = new AuthenticateUserWithRefreshTokenCommand(new UserId(userId));
+        var result = await sender.Send(command, cancellationToken);
+
+        return result.IsFailure ? Forbid(result.ErrorResult) : Results.SignIn(principal, null, AUTH_SCHEME);
+    }
 
     private static IResult SignInUser(OpenIddictRequest request, UserAuthenticationPayload payload)
     {
@@ -52,17 +79,21 @@ public class AuthApiModule: CarterModule
         identity.AddClaim(OpenIddictClaims.Subject, payload.UserId.Value.ToString());
         identity.AddClaim(OpenIddictClaims.Username, payload.Username);
         identity.AddClaim(OpenIddictClaims.Role, payload.Role.ToString());
-        
+
         // allow all claims to be added in the access tokens
         identity.SetDestinations(_ => [OpenIddictDestinations.AccessToken]);
-        
+
         var principal = new ClaimsPrincipal(identity);
-        
+
         principal.SetScopes(OpenIddictScopes.OfflineAccess, OpenIddictScopes.Roles);
-        
+
         return Results.SignIn(principal, null, AUTH_SCHEME);
     }
-    
+
+    #endregion
+
+    #region Public Methods
+
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapPost("/token", async (HttpContext httpContext, ISender sender, CancellationToken cancellationToken) =>
@@ -86,29 +117,14 @@ public class AuthApiModule: CarterModule
                                       return result.IsFailure ? Forbid(result.ErrorResult) : SignInUser(request, result.Value);
                                   }
 
+                                  if (request.IsRefreshTokenGrantType())
+                                  {
+                                      return await RefreshToken(httpContext, sender, cancellationToken);
+                                  }
+
                                   return Forbid(new Error(OpenIddictErrors.UnsupportedGrantType, "Grant type not supported"));
                               }
                    );
-        
-        app.MapGet("/fakeData", async (IOpenIddictApplicationManager manager) =>
-                                {
-                                    var application = new OpenIddictApplicationDescriptor
-                                                      {
-                                                          ClientId = "ShanesCloud",
-                                                          DisplayName = "ShanesCloud Public Client Application",
-                                                          Permissions =
-                                                          {
-                                                              OpenIddictConstants.Permissions.Endpoints.Token,
-
-                                                              OpenIddictConstants.Permissions.GrantTypes.Password,
-                                                              OpenIddictConstants.Permissions.GrantTypes.RefreshToken,
-
-                                                              OpenIddictConstants.Permissions.ResponseTypes.Token
-                                                          },
-                                                          ClientType = OpenIddictConstants.ClientTypes.Public
-                                                      };
-                                    await manager.CreateAsync(application);
-                                });
     }
 
     #endregion

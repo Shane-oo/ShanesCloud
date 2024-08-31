@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using ShanesCloud.Data.Entities;
+using ShanesCloud.Data.Entities.Core;
 
 namespace ShanesCloud.Data;
 
@@ -42,6 +44,25 @@ public class Context: DbContext
         base.OnModelCreating(builder);
         // Apply All Configurations in ShanesCloud.Data
         builder.ApplyConfigurationsFromAssembly(typeof(Context).Assembly);
+
+        ApplySoftDeleteQueryFilter(builder);
+    }
+
+    private static void ApplySoftDeleteQueryFilter(ModelBuilder modelBuilder)
+    {
+        foreach(var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            if (!typeof(ISoftDeletable).IsAssignableFrom(entityType.ClrType))
+            {
+                continue;
+            }
+
+            var param = Expression.Parameter(entityType.ClrType, "entity");
+            var prop = Expression.PropertyOrField(param, nameof(ISoftDeletable.IsDeleted));
+            var entityNotDeleted = Expression.Lambda(Expression.Equal(prop, Expression.Constant(false)), param);
+
+            entityType.SetQueryFilter(entityNotDeleted);
+        }
     }
 
     #endregion
