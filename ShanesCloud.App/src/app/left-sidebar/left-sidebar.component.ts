@@ -1,6 +1,9 @@
-import {Component, input, OnInit, output} from '@angular/core';
-import {FolderModel, PageRouteLinkModel, SearchFolderForm} from "./left-sidebar.models";
-import {FormControl, FormGroup} from "@angular/forms";
+import {Component, computed, input, OnInit, output, signal} from '@angular/core';
+
+import {PageRouteLinkModel} from "./left-sidebar.models";
+import {AuthService} from "../common/core/auth/auth.service";
+import {StateService} from "../common/core/state/state.service";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-left-sidebar',
@@ -8,94 +11,51 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrl: './left-sidebar.component.css'
 })
 export class LeftSidebarComponent implements OnInit {
+  public isUserAuthenticated = signal<boolean>(false);
+  public isUserAdmin = signal<boolean>(false);
+  public userName = computed(() => {
+    if (!this.isUserAuthenticated) {
+      return '';
+    }
+    return this.stateService.userName;
+  });
   public isLeftSidebarCollapsed = input.required<boolean>();
   public changeIsLeftSidebarCollapsed = output<boolean>();
-  public items: PageRouteLinkModel[] = [
+
+  public itemsWhenLoggedIn: PageRouteLinkModel[] = [
     {
       routeLink: '',
       label: 'Home',
       icon: 'lnr lnr-home'
     },
+    // todo files
     {
-      routeLink: 'foo',
-      label: 'Foo',
-      icon: 'lnr lnr-rocket'
+      routeLink: 'users/details',
+      label: this.userName(),
+      icon: 'lnr lnr-user'
     }
   ];
 
-  public folders: FolderModel[] = [];
-  public searchFolderForm: FormGroup<SearchFolderForm>;
-  private searchValue: string = '';
+  public itemsWhenNotLoggedIn: PageRouteLinkModel[] = [
+    {
+      routeLink: 'users/login',
+      label: 'Login',
+      icon: 'lnr lnr-user'
+    }
+  ];
 
-  constructor() {
 
-    this.searchFolderForm = new FormGroup<SearchFolderForm>({
-      name: new FormControl('', {
-        nonNullable: true
-      })
-    });
-
+  constructor(private authService: AuthService,
+              private stateService: StateService) {
+    this.authService.authChanged
+      .pipe(takeUntilDestroyed())
+      .subscribe((isAuthenticated: boolean) => {
+        this.isUserAuthenticated.set(isAuthenticated);
+        this.isUserAdmin.set(this.authService.isUserAdmin());
+      });
   }
 
   public ngOnInit() {
-    // simulate getting computers (first folders)
-    this.folders = [
-      {
-        id: 1,
-        name: 'Home Computer',
-        folders: [
-          {
-            id: 2,
-            name: 'Documents',
-            folders: [
-              {
-                id: 3,
-                name: 'Models',
-                folders: [],
-                files: [],
-              }
-            ],
-            files: [
-              {
-                id: 4,
-                name: 'MyFile.txt'
-              }
-            ]
-          },
-          {
-            id: 5,
-            name: 'Downloads',
-            folders: [],
-            files: [
-              {
-                id: 6,
-                name: 'MyDownload1.text'
-              },
-              {
-                id: 7,
-                name: 'MyDownload2.text'
-              }
-            ]
-          }
-        ],
-        files: [{
-          id: 8,
-          name: 'appsettings.json'
-        },
-        ]
-      },
-      {
-        id: 10,
-        name: 'Macbook',
-        files: [
-          {
-            id: 99,
-            name: 'random.txt'
-          }
-        ],
-        folders: []
-      }
-    ];
 
   }
 
@@ -105,11 +65,5 @@ export class LeftSidebarComponent implements OnInit {
 
   public closeSidenav(): void {
     this.changeIsLeftSidebarCollapsed.emit(true);
-  }
-
-  public onSearchSubmit(): void {
-    this.searchValue = this.searchFolderForm.value.name ?? '';
-
-    console.log('fetch using', this.searchValue);
   }
 }

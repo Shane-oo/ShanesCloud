@@ -11,6 +11,9 @@ public class AppSettings
     
     [Required]
     public AuthServerSettings AuthServerSettings { get; set; }
+    
+    [Required]
+    public string[] AllowedClientUrls { get; set; } 
 
     #endregion
 }

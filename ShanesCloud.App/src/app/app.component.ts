@@ -1,5 +1,6 @@
 import {Component, computed, HostListener, inject, OnInit, signal} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
+import {AuthService} from "./common/core/auth/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit {
   private readonly window: WindowProxy | null;
   private movedToSmallScreen = false;
 
-  constructor() {
+  constructor(private readonly authService: AuthService) {
     this.window = this.document.defaultView;
   }
 
@@ -40,6 +41,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.setScreenWidth();
     this.isLeftSidebarCollapsed.set(this.isSmallScreen());
+
+    if(this.authService.isUserAuthenticated()) {
+      this.authService.sendAuthStateChangedNotification(true);
+    }
   }
 
   public changeIsLeftSidebarCollapsed(isLeftSidebarCollapsed: boolean) {

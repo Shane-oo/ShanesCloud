@@ -24,6 +24,18 @@ builder.Services
        .ValidateDataAnnotations()
        .ValidateOnStart();
 
+const string CorsPolicy = "CorsPolicy";
+builder.Services.AddCors(o =>
+                         {
+                             o.AddPolicy(CorsPolicy, p =>
+                                                     {
+                                                         p.AllowAnyHeader()
+                                                          .AllowAnyMethod()
+                                                          .AllowCredentials()
+                                                          .WithOrigins(appSettings.AllowedClientUrls);
+                                                     });
+                         });
+
 builder.Services.AddDataContext(builder.Configuration.GetConnectionString("ShanesDb"));
 
 // needed with minimal apis using Authorization used to use .AddControllersWithViews()
@@ -55,16 +67,24 @@ builder.Services.AddCarter();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
+if (app.Environment.IsProduction())
+{
+    app.UseHsts();
+}
 
 app.UseHttpsRedirection();
+
+app.UseCors(CorsPolicy);
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseMiddleware<ExceptionHandling>();
 
 
 app.MapGet("/", () => "WHATS UP!");
 app.MapGet("/ping", () => "pong");
-
 
 app.MapCarter(); // Maps all Minimal Api Endpoints that inherit ICarterModule/CarterModule
 

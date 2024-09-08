@@ -1,0 +1,33 @@
+
+<app-files-search></app-files-search>
+
+@for (folder of folders(); track folder.id) {
+  <li class="sidenav-nav-file">
+    <!--todo a link to the file-->
+    <a class="sidenav-nav-link">
+      <i class="sidenav-link-icon lnr lnr-chevron-right"></i>
+      <span class="sidenav-link-text">{{ folder.name }}</span>
+    </a>
+
+    <div class="child-folder">
+      @for (childFolder of folder.folders; track childFolder.id) {
+        <li class="sidenav-nav-file">
+          <a class="sidenav-nav-link">
+            <i class="sidenav-link-icon lnr lnr-enter"></i>
+            <span class="sidenav-link-text">{{ childFolder.name }}</span>
+          </a>
+        </li>
+      }
+
+      @for (childFile of folder.files; track childFile.id) {
+        <li class="sidenav-nav-file">
+          <a class="sidenav-nav-link">
+            <i class="sidenav-link-icon lnr lnr-file-empty"></i>
+            <span class="sidenav-link-text">{{ childFile.name }}</span>
+          </a>
+        </li>
+
+      }
+    </div>
+  </li>
+}

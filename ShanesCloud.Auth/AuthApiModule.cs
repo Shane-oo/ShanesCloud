@@ -50,15 +50,20 @@ public class AuthApiModule: CarterModule
                               new[] { AUTH_SCHEME });
     }
 
-    private static async Task<IResult> RefreshToken(HttpContext httpContext, ISender sender, CancellationToken cancellationToken)
+    private static async Task<IResult> LoginWithPassword(OpenIddictRequest request, ISender sender, CancellationToken cancellationToken)
     {
-        // Retrieve the claims principal stored in the refresh token
-        var principal = (await httpContext.AuthenticateAsync(AUTH_SCHEME)).Principal;
-        if (principal == null)
-        {
-            return Forbid(new Error(OpenIddictErrors.InvalidRequest, "Could not get principal from refresh token"));
-        }
+        var command = new AuthenticateUserWithPasswordCommand
+                      {
+                          Email = request.Username,
+                          Password = request.Password
+                      };
+        var result = await sender.Send(command, cancellationToken);
 
+        return result.IsFailure ? Forbid(result.ErrorResult) : SignInUser(request, result.Value);
+    }
+
+    private static async Task<IResult> RefreshToken(ClaimsPrincipal principal, ISender sender, CancellationToken cancellationToken)
+    {
         var subject = principal.GetClaim(OpenIddictClaims.Subject);
         if (string.IsNullOrEmpty(subject) || !Guid.TryParse(subject, out var userId))
         {
@@ -80,12 +85,12 @@ public class AuthApiModule: CarterModule
         identity.AddClaim(OpenIddictClaims.Username, payload.Username);
         identity.AddClaim(OpenIddictClaims.Role, payload.Role.ToString());
 
-        // allow all claims to be added in the access tokens
-        identity.SetDestinations(_ => [OpenIddictDestinations.AccessToken]);
+        // allow all claims to be added in the tokens
+        identity.SetDestinations(_ => [OpenIddictDestinations.AccessToken, OpenIddictDestinations.IdentityToken]);
 
         var principal = new ClaimsPrincipal(identity);
 
-        principal.SetScopes(OpenIddictScopes.OfflineAccess, OpenIddictScopes.Roles);
+        principal.SetScopes(OpenIddictScopes.OfflineAccess, OpenIddictScopes.OpenId, OpenIddictScopes.Roles, OpenIddictScopes.Profile);
 
         return Results.SignIn(principal, null, AUTH_SCHEME);
     }
@@ -107,19 +112,19 @@ public class AuthApiModule: CarterModule
 
                                   if (request.IsPasswordGrantType())
                                   {
-                                      var command = new AuthenticateUserWithPasswordCommand
-                                                    {
-                                                        Email = request.Username,
-                                                        Password = request.Password
-                                                    };
-                                      var result = await sender.Send(command, cancellationToken);
-
-                                      return result.IsFailure ? Forbid(result.ErrorResult) : SignInUser(request, result.Value);
+                                      return await LoginWithPassword(request, sender, cancellationToken);
                                   }
 
                                   if (request.IsRefreshTokenGrantType())
                                   {
-                                      return await RefreshToken(httpContext, sender, cancellationToken);
+                                      // Retrieve the claims principal stored in the refresh token
+                                      var principal = (await httpContext.AuthenticateAsync(AUTH_SCHEME)).Principal;
+                                      if (principal == null)
+                                      {
+                                          return Forbid(new Error(OpenIddictErrors.InvalidRequest, "Could not get principal from refresh token"));
+                                      }
+
+                                      return await RefreshToken(principal, sender, cancellationToken);
                                   }
 
                                   return Forbid(new Error(OpenIddictErrors.UnsupportedGrantType, "Grant type not supported"));

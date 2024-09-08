@@ -27,7 +27,7 @@ public class AuthenticateUserWithPasswordHandler: ICommandHandler<AuthenticateUs
 
     #region Private Methods
 
-    private static Result<UserAuthenticationPayload> Failure()
+    private static Result<UserAuthenticationPayload> Reject()
     {
         return Result.Failure<UserAuthenticationPayload>(Error.NotFound(nameof(User)));
     }
@@ -47,23 +47,23 @@ public class AuthenticateUserWithPasswordHandler: ICommandHandler<AuthenticateUs
 
         if (user == null)
         {
-            return Failure();
+            return Reject();
         }
 
         if (user.UserRole.Role.RoleEnum == Roles.Guest)
         {
-            return Failure();
+            return Reject();
         }
 
         if (await _userManager.IsLockedOutAsync(user))
         {
-            return Failure();
+            return Reject();
         }
 
         if (!await _userManager.CheckPasswordAsync(user, command.Password))
         {
             await _userManager.AccessFailedAsync(user);
-            return Failure();
+            return Reject();
         }
 
         user.LoginOn = DateTime.UtcNow;
