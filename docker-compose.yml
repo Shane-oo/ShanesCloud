@@ -30,7 +30,14 @@
     build:
       context: .
       dockerfile: ShanesCloud.Api/Dockerfile
-
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=https://+:8080
+        - ASPNETCORE_HTTPS_PORT=8080
+        - ASPNETCORE_Kestrel__Certificates__Default__Password=Password123!
+        - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
   
   shanescloud.app:
     image: shanescloud.app
